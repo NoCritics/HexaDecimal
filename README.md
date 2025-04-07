@@ -29,7 +29,8 @@ HexaDecimal combines the merging mechanics of 2048 with a hexagonal grid for a f
 2. After each move, a new tile appears
 3. Plan your moves carefully to keep the grid from filling up
 4. Try to create a 3072 tile to win!
+5. Download, import into the Godot engine and run with F5 or export into executable.
 
 ## Development
 
-Built with Godot Engine.
+Built with Godot Engine by me, mostly for testing.
