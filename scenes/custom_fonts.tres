@@ -1,0 +1,12 @@
+[gd_resource type="FontFile" load_steps=1 format=3 uid="uid://bf35up1c6bfta"]
+
+[ext_resource type="FontFile" uid="uid://bua3u1oc2faab" path="res://fonts/NeonLand.ttf" id="1_abcde"]
+
+[resource]
+fallbacks = [ExtResource("1_abcde")]
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)

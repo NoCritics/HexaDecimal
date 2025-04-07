@@ -1,0 +1,256 @@
+[gd_scene load_steps=12 format=3 uid="uid://c6x7lypn2aywd"]
+
+[ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_1m4rx"]
+[ext_resource type="Script" path="res://scripts/hex_grid.gd" id="2_q6j4g"]
+[ext_resource type="Script" path="res://scripts/hex_grid_background.gd" id="3_p4amd"]
+[ext_resource type="Script" path="res://scripts/glitch_title.gd" id="4_xglts"]
+[ext_resource type="Script" path="res://scripts/background_particles.gd" id="5_nvtfp"]
+[ext_resource type="Script" path="res://scripts/ambient_sound.gd" id="6_sv2wx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dscka"]
+bg_color = Color(0.0588235, 0.0588235, 0.0784314, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0.698039, 0.878431, 0.32549)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="SystemFont" id="SystemFont_tqq87"]
+font_names = PackedStringArray("Sans-Serif")
+subpixel_positioning = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_8lq5v"]
+font = SubResource("SystemFont_tqq87")
+font_size = 24
+font_color = Color(0, 0.835294, 1, 1)
+outline_size = 2
+outline_color = Color(0, 0.439216, 0.580392, 1)
+shadow_color = Color(0, 0.215686, 0.290196, 0.611765)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f23kx"]
+bg_color = Color(0.0313726, 0.0313726, 0.0470588, 0.901961)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0.698039, 0.878431, 0.45098)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+shadow_color = Color(0, 0.4, 1, 0.301961)
+shadow_size = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_12npa"]
+bg_color = Color(0, 0.517647, 0.666667, 0.752941)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0, 0.176471, 0.454902, 0.419608)
+shadow_size = 5
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_1m4rx")
+
+[node name="Background" type="ColorRect" parent="."]
+offset_right = 1600.0
+offset_bottom = 900.0
+color = Color(0.0235294, 0.0235294, 0.0392157, 1)
+
+[node name="BackgroundParticles" type="Node2D" parent="."]
+script = ExtResource("5_nvtfp")
+
+[node name="AmbientSound" type="Node" parent="."]
+script = ExtResource("6_sv2wx")
+
+[node name="HexGridBackground" type="Panel" parent="."]
+offset_left = 558.0
+offset_top = 209.0
+offset_right = 1040.0
+offset_bottom = 691.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_dscka")
+script = ExtResource("3_p4amd")
+
+[node name="HexGrid" type="Node2D" parent="."]
+position = Vector2(800, 450)
+script = ExtResource("2_q6j4g")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Title" type="Label" parent="UI"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -200.0
+offset_top = 20.0
+offset_right = 200.0
+offset_bottom = 70.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0.835294, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0.392157, 0.611765, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 42
+text = "HEXADECIMAL"
+horizontal_alignment = 1
+script = ExtResource("4_xglts")
+
+[node name="ScoreLabel" type="Label" parent="UI"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -200.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 46.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 18
+text = "Score: 0"
+label_settings = SubResource("LabelSettings_8lq5v")
+horizontal_alignment = 2
+
+[node name="HighScoreLabel" type="Label" parent="UI"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -200.0
+offset_top = 50.0
+offset_right = -20.0
+offset_bottom = 76.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 18
+text = "Best: 0"
+label_settings = SubResource("LabelSettings_8lq5v")
+horizontal_alignment = 2
+
+[node name="Instructions" type="Label" parent="UI"]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 320.0
+offset_bottom = 280.0
+theme_override_colors/font_color = Color(0, 0.835294, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0.392157, 0.611765, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 20
+text = "Controls:
+- W or ↑: up
+- S or ↓: down
+- Q or ←: bottom left
+- D or →: bottom right
+- A: top left
+- E: top right
+- R: restart game"
+
+[node name="GameOverPanel" type="Panel" parent="UI"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -100.0
+offset_right = 200.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_f23kx")
+
+[node name="Label" type="Label" parent="UI/GameOverPanel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -82.0
+offset_top = 20.0
+offset_right = 82.0
+offset_bottom = 46.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 24
+text = "GAME OVER"
+label_settings = SubResource("LabelSettings_8lq5v")
+
+[node name="RestartButton" type="Button" parent="UI/GameOverPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.0
+offset_top = 20.0
+offset_right = 60.0
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_12npa")
+text = "Play Again"
+
+[node name="GameWonPanel" type="Panel" parent="UI"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -100.0
+offset_right = 200.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_f23kx")
+
+[node name="Label" type="Label" parent="UI/GameWonPanel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -97.0
+offset_top = 20.0
+offset_right = 97.0
+offset_bottom = 46.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 24
+text = "YOU WIN: 3072!"
+label_settings = SubResource("LabelSettings_8lq5v")
+
+[node name="ContinueButton" type="Button" parent="UI/GameWonPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.0
+offset_top = -20.0
+offset_right = 60.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_12npa")
+text = "Continue"
+
+[node name="RestartButton" type="Button" parent="UI/GameWonPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.0
+offset_top = 30.0
+offset_right = 60.0
+offset_bottom = 70.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_12npa")
+text = "New Game"
+
+[connection signal="pressed" from="UI/GameOverPanel/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="UI/GameWonPanel/ContinueButton" to="." method="_on_continue_button_pressed"]
+[connection signal="pressed" from="UI/GameWonPanel/RestartButton" to="." method="_on_restart_button_pressed"]
